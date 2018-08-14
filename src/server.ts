@@ -1,11 +1,12 @@
-const http = require('http');
-const db = require('./db/db.json');
+import http from 'http';
+// import db from './ ./db/db.json';
 
-const server = http.createServer((req, res) => {
+const server: http.Server = http.createServer((req, res) => {
   res.setHeader('Content-Type', 'application/json');
   res.setHeader('Access-Control-Allow-Origin', '*');
 
-  res.write(JSON.stringify(db));
+  // res.write(JSON.stringify(db));
+  res.write('Тест');  
   res.end();
 });
 

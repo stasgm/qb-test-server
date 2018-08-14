@@ -9,6 +9,7 @@
     "build": "tsc"
   },
   "devDependencies": {
+    "@types/node": "^10.7.0",
     "babel-cli": "^6.26.0",
     "babel-preset-es2015": "^6.24.1"
   },
