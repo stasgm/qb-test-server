@@ -1,5 +1,5 @@
 const http = require('http');
-const db = require('./db.json');
+const db = require('./db/db.json');
 
 const server = http.createServer((req, res) => {
   res.setHeader('Content-Type', 'application/json');
