@@ -3,7 +3,7 @@
 import { deserializeERModel, EntityLink, EntityQuery } from "gdmn-orm";
 import fs from "fs";
 
-const dbFile = "db.json"; // db.json
+const dbFile = "./src/db/db.json"; // db.json
 const data = fs.readFileSync(`./${dbFile}`, { encoding: "utf-8" });
 const erModel = deserializeERModel(JSON.parse(data));
 

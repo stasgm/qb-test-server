@@ -1,16 +1,20 @@
 import http from 'http';
-// import db from './ ./db/db.json';
+import fs from 'fs';
+// import db from './src/db/db.json';
 
 const server: http.Server = http.createServer((req, res) => {
   res.setHeader('Content-Type', 'application/json');
   res.setHeader('Access-Control-Allow-Origin', '*');
 
-  // res.write(JSON.stringify(db));
-  res.write('Тест');  
+  const dbFile = "./src/db/db.json"; // db.json
+  const data = fs.readFileSync(`./${dbFile}`, { encoding: "utf-8" });  
+
+  res.write(JSON.stringify(data));
+  // res.write('Тест');  
   res.end();
 });
 
 const port = 8090;
 server.listen(port, () => {
-  console.log(`test server started on port ${port}`);
+  console.log(`Test server started on port ${port}`);
 });
