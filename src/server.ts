@@ -16,5 +16,5 @@ const server: http.Server = http.createServer((req, res) => {
 
 const port = 8090;
 server.listen(port, () => {
-  console.log(`Test server started on port ${port}`);
+  console.log(`Test server started on http://localhost:${port}`);
 });
