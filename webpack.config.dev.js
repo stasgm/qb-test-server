@@ -1,35 +1,38 @@
+const webpack = require('webpack');
+const path = require('path');
+const nodeExternals = require('webpack-node-externals');
+
 module.exports = {
-    entry: "./src/server.ts",
-    mode: "development",
-    output: {
-        filename: "bundle.js",
-        path: __dirname + "/dist"
-    },
-
-    // Enable sourcemaps for debugging webpack's output.
-    devtool: "source-map",
-
-    resolve: {
-        // Add '.ts' and '.tsx' as resolvable extensions.
-        extensions: [".ts", ".tsx", ".js", ".json"]
-    },
-
-    module: {
-        rules: [
-            // All files with a '.ts' or '.tsx' extension will be handled by 'awesome-typescript-loader'.
-            { test: /\.tsx?$/, loader: "awesome-typescript-loader" },
-
-            // All output '.js' files will have any sourcemaps re-processed by 'source-map-loader'.
-            { enforce: "pre", test: /\.js$/, loader: "source-map-loader" }
-        ]
-    },
-
-    // When importing a module whose path matches one of the following, just
-    // assume a corresponding global variable exists and use that instead.
-    // This is important because it allows us to avoid bundling all of our
-    // dependencies, which allows browsers to cache those libraries between builds.
-    externals: {
-        "react": "React",
-        "react-dom": "ReactDOM"
-    }
+  // entry is where, say, your app starts - it can be called main.ts, index.ts, app.ts, whatever
+  entry: ['webpack/hot/poll?100', './src/server.ts'],
+  // This forces webpack not to compile TypeScript for one time, but to stay running, watch for file changes in project directory and re-compile if needed
+  watch: false,
+  // Is needed to have in compiled output imports Node.JS can understand. Quick search gives you more info
+  target: 'node',
+  // Prevents warnings from TypeScript compiler
+ externals: [
+    nodeExternals({
+      whitelist: ['webpack/hot/poll?100'],
+    }),
+  ],
+  module: {
+    rules: [
+      {
+        test: /.tsx?$/,
+        use: 'ts-loader',
+        exclude: /node_modules/,
+      },
+    ],
+  },
+  mode: 'development',
+  resolve: {
+    extensions: ['.tsx', '.ts', '.js'],
+  },
+  plugins: [
+    new webpack.HotModuleReplacementPlugin()
+  ],
+  output: {
+    path: path.join(__dirname, 'dist'),
+    filename: 'server.js',
+  },
 };

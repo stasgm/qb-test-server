@@ -4,10 +4,9 @@
   "author": "stasgm <stasgm@gmail.com>",
   "license": "MIT",
   "scripts": {
-    "server": "ts-node ./src/server.ts",
-    "start": "ts-node ./src/app.ts",
-    "build:server": "webpack --config ./webpack.config.dev.js",
-    "build:client": "ts-node ./src/app.ts",
+    "start:server-dev": "ts-node ./src/server.ts",
+    "start:server": "yarn build:server && node ./dist/server.js",
+    "build:server": "webpack --config webpack.config.dev.js",
     "debug": "nodemon --inspect ./dist/"
   },
   "devDependencies": {
@@ -19,9 +18,12 @@
     "node-fetch": "^2.2.0",
     "nodemon": "^1.18.3",
     "source-map-loader": "^0.2.4",
+    "ts-loader": "^5.3.1",
     "ts-node": "^7.0.1",
+    "tslint": "^5.11.0",
     "typescript": "^3.2.1",
-    "webpack-cli": "^3.1.2"
+    "webpack-cli": "^3.1.2",
+    "webpack-node-externals": "^1.7.2"
   },
   "dependencies": {
     "webpack": "^4.26.1"
